@@ -1,0 +1,11 @@
+[project]
+name = "aps-medm-navigator"
+version = "0.1.0"
+description = "APS MEDM Navigator"
+requires-python = ">=3.13"
+dependencies = [
+    "Flask==3.0.0",
+    "requests==2.31.0",
+    "Flask-CORS==4.0.0",
+    "python-dotenv==1.0.0",
+]

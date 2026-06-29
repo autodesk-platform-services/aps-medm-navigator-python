@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEDM Asset Navigator</title>
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body data-authenticated="{{ 'true' if authenticated else 'false' }}">
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='img/flow_data.svg') }}" alt="Navigator Logo">
+            <span>Autodesk <strong>APS</strong> | MEDM Asset Navigator</span>
+        </div>
+        <div class="header-right">
+            {% if authenticated %}
+                <span class="user-name">{{ user_name or 'Signed in' }}</span>
+                <a href="{{ url_for('auth.logout') }}" class="auth-btn">Log Off</a>
+            {% else %}
+                <a href="{{ url_for('auth.login') }}" class="auth-btn">Sign In</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <main>
+        <div id="sidebar">
+            <div class="sidebar-header">Navigation</div>
+            <div id="tree-container">
+                <div class="loading-text">Connecting to MEDM...</div>
+            </div>
+        </div>
+
+        <div id="resizer"></div>
+
+        <div id="content">
+            <div id="welcome-screen" class="welcome-screen">
+                <i class="fas fa-folder-open"></i>
+                <h2>Ready to explore</h2>
+                <p>Select an asset from the tree to see its data.</p>
+            </div>
+
+            <div id="details-card" class="details-card">
+                <div class="card-header">
+                    <h2 id="asset-name">Asset Name</h2>
+                </div>
+                <div class="card-body">
+                    <div class="info-row">
+                        <div class="info-label">Asset ID</div>
+                        <div class="info-value" id="asset-id">---</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Type IDs</div>
+                        <div class="info-value" id="asset-type-ids">---</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Components</div>
+                        <div class="info-value">
+                            <div id="components-container" class="tag-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
